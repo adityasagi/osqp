@@ -2,7 +2,14 @@
 cmake_minimum_required (VERSION 3.2)
 
 # Project name
-project (osqp)
+project (ros_osqp)
+
+find_package(catkin)
+
+catkin_package(
+	INCLUDE_DIRS include
+	LIBRARIES osqp
+)
 
 # Export compile commands
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -436,3 +443,12 @@ if (UNITTESTS)
     enable_testing()
     add_test(NAME tester COMMAND $<TARGET_FILE:osqp_tester>)
 endif()
+
+
+
+
+install( TARGETS osqp
+	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+	RUNTIME DESTINATION ${CATKIN_PACAKGE_BIN_DESTINATION}
+)
